@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Webcam</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            font-family: cursive;
+            margin: 0;
+        }
+
+        .header {
+            padding: 5px;
+            text-align: center;
+            background: #0056b3;
+            color: white;
+        }
+
+        .header h2 {
+            font-size: 60px;
+        }
+
+
+        #webcam {
+            width: 750px;
+            height: 480px;
+            margin: 0 auto; /* Center the video element */
+            display: block;
+        }
+
+        h1 {
+            font-size: 12px;
+        }
+
+    button {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  button {
+    padding: 10px 20px;
+    margin: 10 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+  }
+  button.button {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+  }
+
+
+  a {
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  a {
+    padding: 10px 20px;
+    margin: 0 10px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+  }
+  a {
+    display: inline-block;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 5px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  a:hover {
+    background-color: #0056b3;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h2>Human Computer Interaction Webcam</h2>
+    </div>
+
+    <video id="webcam"></video>
+
+    <center>
+        <button class="button" onclick="offCam()">Turn Off</button>
+    </center>
+
+    <center>
+        <h1 id='webcamoff'></h1>
+    </center>
+
+    <center>
+        <a href="profile.html" class="button">Exit</a>
+    </center>
+
+    <script>
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                var webcam = document.getElementById('webcam');
+                webcam.srcObject = stream;
+                webcam.play();
+            });
+        }
+    </script>
+
+    <script>
+        function offCam() {
+            window.alert("Are you sure you want to turn it off?");
+            var stream = document.getElementById('webcam').srcObject;
+            stream.getTracks().forEach(function(track) {
+                track.stop();
+            });
+            document.getElementById('webcam').srcObject = null;
+            var msg = "Your cam is already turned off!";
+            document.getElementById('webcamoff').innerHTML = msg;
+        }
+    </script>
+</body>
+</html>
